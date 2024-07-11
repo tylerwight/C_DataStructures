@@ -5,16 +5,6 @@
 #include <ctype.h>
 #include "datastructures.h"
 
-double eval_rpn(char *expression);
-bool infix_to_postfix(char *expression, char *output);
-double get_full_number(char *input);
-void double_to_string(double num, char *str);
-int get_num_len(char *input);
-bool is_valid_operator(char *input){
-    return *input == '+' || *input == '-' || *input == '*' || *input == '/';
-}
-
-
 int main(){
     //stack
     struct stack *stacktop = NULL;
