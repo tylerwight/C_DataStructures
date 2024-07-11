@@ -9,6 +9,7 @@ int main(){
     //stack
     struct stack *stacktop = NULL;
     struct stack input_item_stack;
+    for (int i = 0; i < MAX_DATA_LENGTH; i++){input_item_stack.data[i] = '\0';}
 
     strncpy(input_item_stack.data, "hello", 6);
     input_item_stack.data[5] = '\0';
@@ -28,6 +29,7 @@ int main(){
     struct queue *front = NULL;
     struct queue *back = NULL;
     struct queue input_item_queue;
+    for (int i = 0; i < MAX_DATA_LENGTH; i++){input_item_queue.data[i] = '\0';}
 
 
     strncpy(input_item_queue.data, "hello", 6);

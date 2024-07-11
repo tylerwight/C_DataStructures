@@ -7,14 +7,14 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-
+#define MAX_DATA_LENGTH 10
 
 struct stack {
-    char data[10];
+    char data[MAX_DATA_LENGTH];
     struct stack *next;
 };
 struct queue{
-    char data[10];
+    char data[MAX_DATA_LENGTH];
     struct queue *left;
     struct queue *right;
 };
