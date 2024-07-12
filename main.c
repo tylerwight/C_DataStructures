@@ -5,8 +5,18 @@
 #include <ctype.h>
 #include "datastructures.h"
 
+void stack_example();
+void queue_example();
+
 int main(){
-    //stack
+
+    stack_example();
+    queue_example();
+
+}
+
+
+void stack_example(){
     struct stack *stacktop = NULL;
     struct stack input_item_stack;
     for (int i = 0; i < MAX_DATA_LENGTH; i++){input_item_stack.data[i] = '\0';}
@@ -24,8 +34,9 @@ int main(){
     stack_pop(&stacktop);
     stack_print(stacktop);
 
+}
 
-    //queue
+void queue_example(){
     struct queue *front = NULL;
     struct queue *back = NULL;
     struct queue input_item_queue;
@@ -47,10 +58,6 @@ int main(){
     queue_dequeue(&front);
     queue_print(front);
 
-
 }
-
-
-
 
 
