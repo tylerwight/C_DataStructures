@@ -157,7 +157,6 @@ struct tree* tree_insert_node_internal(struct tree *root, struct tree *input, st
 
 struct tree* tree_insert_node(struct tree *root, struct tree *input){
     return tree_insert_node_internal(root, input, NULL);
-
 }
 
 
@@ -185,43 +184,43 @@ int tree_get_cols(int height) {
 }
 
 
-void tree_print_internal(int **m, struct tree *root, int col, int row, int height){
+void tree_populate_print_matrix(int **print_matrix, struct tree *root, int col, int row, int height){
     if (root == NULL){return;}
 
-    m[row][col] = root->data;
-    tree_print_internal(m, root->left, col - pow(2, height - 2), row + 1, height - 1);
-    tree_print_internal(m, root->right, col + pow(2, height - 2), row + 1, height - 1);
+    print_matrix[row][col] = root->data;
+    tree_populate_print_matrix(print_matrix, root->left, col - pow(2, height - 2), row + 1, height - 1);
+    tree_populate_print_matrix(print_matrix, root->right, col + pow(2, height - 2), row + 1, height - 1);
 
 }
 
 void tree_print(struct tree *root){
     int height = tree_get_height(root);
     int col = tree_get_cols(height);
-    int **m = (int**)malloc(height * sizeof(int*));
+    int **print_matrix = (int**)malloc(height * sizeof(int*));
     for (int i = 0; i < height; i++){
-        m[i] = (int*)malloc(col * sizeof(int));
+        print_matrix[i] = (int*)malloc(col * sizeof(int));
         for (int j = 0; j < col; j++){
-            m[i][j] = 0;
+            print_matrix[i][j] = 0;
         }
     }
 
-    tree_print_internal(m, root, col/2, 0, height);
+    tree_populate_print_matrix(print_matrix, root, col/2, 0, height);
 
     for (int i = 0; i < height; i++){
         for (int j = 0; j < col; j++){
-            if (m[i][j] == 0){
+            if (print_matrix[i][j] == 0){
                 printf("  ");
             } else{
-                printf("%d ", m[i][j]);
+                printf("%d ", print_matrix[i][j]);
             }
         }
         printf("\n");
     }
 
     for (int i = 0; i < height; i++){
-        free(m[i]);
+        free(print_matrix[i]);
     }
-    free(m);
+    free(print_matrix);
 
 
 }

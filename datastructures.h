@@ -57,7 +57,7 @@ struct tree* tree_insert_node_internal(struct tree *root, struct tree *input, st
 int tree_get_height(struct tree *root);
 int tree_get_cols(int height);
 void tree_print(struct tree *root);
-void tree_print_internal(int **m, struct tree *root, int col, int row, int height);
+void tree_populate_print_matrix(int **print_matrix, struct tree *root, int col, int row, int height);
 
 
 
