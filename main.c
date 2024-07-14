@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <math.h>
 #include "datastructures.h"
 
 void stack_example();

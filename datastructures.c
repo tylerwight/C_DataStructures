@@ -1,5 +1,4 @@
 #include "datastructures.h"
-#include <math.h>
 
 
 //####################################################
