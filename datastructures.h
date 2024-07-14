@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <math.h>
 
 #define MAX_DATA_LENGTH 10
 
@@ -18,6 +19,14 @@ struct queue{
     struct queue *left;
     struct queue *right;
 };
+
+struct tree{
+    int data;
+    struct tree *parent;
+    struct tree *left;
+    struct tree *right;
+};
+
 
 //####################################################
 //#############       STACK            ###############
@@ -37,6 +46,20 @@ void queue_enqueue(struct queue **back, struct queue *input);
 void queue_dequeue(struct queue **front);
 void queue_print(struct queue *front);
 struct queue* queue_get_front(struct queue *back);
+
+
+//####################################################
+//#############       Tree             ###############
+//####################################################
+struct tree* tree_create_node(struct tree *input);
+struct tree* tree_insert_node(struct tree *root, struct tree *input);
+struct tree* tree_insert_node_internal(struct tree *root, struct tree *input, struct tree *parent);
+int tree_get_height(struct tree *root);
+int tree_get_cols(int height);
+void tree_print(struct tree *root);
+void tree_print_internal(int **m, struct tree *root, int col, int row, int height);
+
+
 
 //####################################################
 //#############       UTILS            ###############

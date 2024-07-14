@@ -3,18 +3,42 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <math.h>
 #include "datastructures.h"
 
 void stack_example();
 void queue_example();
+void bst_tree_example();
 
 int main(){
-
-    stack_example();
-    queue_example();
+    bst_tree_example();
+    // stack_example();
+    // queue_example();
 
 }
 
+void bst_tree_example(){
+    struct tree *root = NULL;
+    struct tree input_item_tree;
+
+    input_item_tree.data = 5;
+    root = tree_insert_node(root, &input_item_tree);
+    input_item_tree.data = 7;
+    root = tree_insert_node(root, &input_item_tree);
+    input_item_tree.data = 3;
+    root = tree_insert_node(root, &input_item_tree);
+    input_item_tree.data = 8;
+    root = tree_insert_node(root, &input_item_tree);
+    input_item_tree.data = 4;
+    root = tree_insert_node(root, &input_item_tree);
+    input_item_tree.data = 6;
+    root = tree_insert_node(root, &input_item_tree);
+    input_item_tree.data = 2;
+    root = tree_insert_node(root, &input_item_tree);
+    tree_print(root);
+
+    printf("\ntree height: %d\n", tree_get_height(root));
+}
 
 void stack_example(){
     struct stack *stacktop = NULL;

@@ -1,4 +1,5 @@
 #include "datastructures.h"
+#include <math.h>
 
 
 //####################################################
@@ -121,6 +122,113 @@ struct queue *queue_get_front(struct queue *back){
     return current;
 
 }
+
+
+//####################################################
+//#############       Tree             ###############
+//####################################################
+struct tree *tree_create_node( struct tree *input){
+    struct tree *newnode = (struct tree*) malloc(sizeof(struct tree));
+    if (newnode == NULL){
+        printf("error allocating memory");
+        exit(1);
+    }
+
+    newnode->data = input->data;
+    newnode->parent = input->parent;
+    newnode->right = NULL;
+    newnode->left = NULL;
+    return newnode;
+    return NULL;
+}
+
+struct tree* tree_insert_node_internal(struct tree *root, struct tree *input, struct tree *parent){
+    if (root == NULL) {
+        input->parent = parent;
+        return tree_create_node(input);
+    }
+
+    if (input->data < root->data){
+        root->left = tree_insert_node_internal(root->left, input, root);
+    } else if (input->data > root->data){
+        root->right = tree_insert_node_internal(root->right, input, root);
+    }
+    return root;
+}
+
+struct tree* tree_insert_node(struct tree *root, struct tree *input){
+    return tree_insert_node_internal(root, input, NULL);
+
+}
+
+
+int tree_get_height(struct tree *root){
+    int output;
+    if (root == NULL){
+        return 0;
+    }
+    int left_height = tree_get_height(root->left);
+    int right_height = tree_get_height(root->right);
+
+    if (left_height > right_height){
+        output = left_height + 1;
+    }else{
+        output = right_height + 1;
+    }
+
+    return output;
+}
+
+int tree_get_cols(int height) {
+    if (height == 1)
+        return 1;
+    return tree_get_cols(height - 1) + tree_get_cols(height - 1) + 1;
+}
+
+
+void tree_print_internal(int **m, struct tree *root, int col, int row, int height){
+    if (root == NULL){return;}
+
+    m[row][col] = root->data;
+    tree_print_internal(m, root->left, col - pow(2, height - 2), row + 1, height - 1);
+    tree_print_internal(m, root->right, col + pow(2, height - 2), row + 1, height - 1);
+
+}
+
+void tree_print(struct tree *root){
+    int height = tree_get_height(root);
+    int col = tree_get_cols(height);
+    int **m = (int**)malloc(height * sizeof(int*));
+    for (int i = 0; i < height; i++){
+        m[i] = (int*)malloc(col * sizeof(int));
+        for (int j = 0; j < col; j++){
+            m[i][j] = 0;
+        }
+    }
+
+    tree_print_internal(m, root, col/2, 0, height);
+
+    for (int i = 0; i < height; i++){
+        for (int j = 0; j < col; j++){
+            if (m[i][j] == 0){
+                printf("  ");
+            } else{
+                printf("%d ", m[i][j]);
+            }
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < height; i++){
+        free(m[i]);
+    }
+    free(m);
+
+
+}
+
+
+
 
 
 
